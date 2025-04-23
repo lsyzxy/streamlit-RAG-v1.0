@@ -10,6 +10,7 @@ cycler==0.12.1
 dashscope==1.22.2
 dill==0.3.7
 exceptiongroup==1.2.0
+faiss-cpu==1.7.4
 fastjsonschema==2.19.0
 fonttools==4.46.0
 fqdn==1.5.1
