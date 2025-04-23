@@ -32,7 +32,6 @@ cffi==1.15.1
 comm==0.2.0
 contourpy==1.2.0
 cycler==0.12.1
-daal4py==2023.1.1
 dashscope==1.22.2
 dataclasses-json==0.6.4
 debugpy==1.8.0
@@ -169,7 +168,7 @@ stack-data==0.6.3
 statsmodels==0.14.0
 streamlit==1.33.0
 sympy==1.13.1
-TBB==0.2
+TBB==2022.1.0
 tenacity==8.2.3
 terminado==0.18.0
 tiktoken==0.6.0
