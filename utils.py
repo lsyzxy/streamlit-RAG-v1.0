@@ -11,8 +11,12 @@ from langchain.chains import ConversationalRetrievalChain
 import os
 
 class TongyiEmbeddings(Embeddings):
+
     def __init__(self):
-        os.environ["DASHSCOPE_API_KEY"] = os.getenv("DASHSCOPE_API_KEY")
+        api_key = os.getenv("DASHSCOPE_API_KEY")
+        if api_key is None:
+            raise ValueError("DASHSCOPE_API_KEY environment variable is not set.")
+        os.environ["DASHSCOPE_API_KEY"] = api_key
 
     def embed_documents(self, texts):
         return [TextEmbedding.call(input=text, model="text-embedding-v1").output["embeddings"][0]["embedding"] for text in texts]
