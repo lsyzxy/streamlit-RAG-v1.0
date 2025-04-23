@@ -1,5 +1,5 @@
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores import Chroma  # 导入Chroma
 from langchain_openai import OpenAIEmbeddings
 from langchain_openai import ChatOpenAI
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -43,7 +43,8 @@ def qa_agent(qwen_api_key, dashscope_api_key, memory, uploaded_file, question):
     texts = text_splitter.split_documents(docs)
     # 实例化 TongyiEmbeddings 时传入 dashscope_api_key
     embeddings_model = TongyiEmbeddings(dashscope_api_key)
-    db = FAISS.from_documents(texts, embeddings_model)
+    # 使用Chroma代替FAISS
+    db = Chroma.from_documents(texts, embeddings_model)
     retriever = db.as_retriever()
     qa = ConversationalRetrievalChain.from_llm(
         llm=model,

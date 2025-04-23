@@ -5,12 +5,12 @@ attrs==23.2.0
 beautifulsoup4==4.12.2
 cachetools==5.3.3
 certifi==2024.2.2
+chromadb==0.4.16
 contourpy==1.2.0
 cycler==0.12.1
 dashscope==1.22.2
 dill==0.3.7
 exceptiongroup==1.2.0
-faiss-cpu==1.7.4
 fastjsonschema==2.19.0
 fonttools==4.46.0
 fqdn==1.5.1
