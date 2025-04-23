@@ -3,7 +3,6 @@ import streamlit as st
 from langchain.memory import ConversationBufferMemory
 from utils import qa_agent
 
-
 st.title("📑 AI智能PDF问答工具")
 
 with st.sidebar:
@@ -28,7 +27,7 @@ if uploaded_file and question and not api_key:
 
 if ask_button and uploaded_file and question and api_key:
     with st.spinner("AI正在思考中，请稍等..."):
-        response = qa_agent(api_key, st.session_state["memory"],
+        response = qa_agent(api_key, api_key, st.session_state["memory"],
                             uploaded_file, question)
     st.write("### 答案")
     st.write(response["answer"])

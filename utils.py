@@ -12,11 +12,7 @@ import os
 
 class TongyiEmbeddings(Embeddings):
 
-    def __init__(self):
-        api_key = os.getenv("DASHSCOPE_API_KEY")
-        if api_key is None:
-            raise ValueError("The DASHSCOPE_API_KEY environment variable is not set in the current environment. "
-                             "Please set it in the Streamlit Cloud settings.")
+    def __init__(self, api_key):
         os.environ["DASHSCOPE_API_KEY"] = api_key
 
     def embed_documents(self, texts):
@@ -25,7 +21,7 @@ class TongyiEmbeddings(Embeddings):
     def embed_query(self, text):
         return TextEmbedding.call(input=text, model="text-embedding-v1").output["embeddings"][0]["embedding"]
 
-def qa_agent(qwen_api_key, memory, uploaded_file, question):
+def qa_agent(qwen_api_key, dashscope_api_key, memory, uploaded_file, question):
     model = ChatOpenAI(
         model="qwen-plus",
         api_key=qwen_api_key,
@@ -43,7 +39,7 @@ def qa_agent(qwen_api_key, memory, uploaded_file, question):
         separators=["\n", "。", "！", "？", "，", "、", ""]
     )
     texts = text_splitter.split_documents(docs)
-    embeddings_model = TongyiEmbeddings()
+    embeddings_model = TongyiEmbeddings(dashscope_api_key)
     db = FAISS.from_documents(texts, embeddings_model)
     retriever = db.as_retriever()
     qa = ConversationalRetrievalChain.from_llm(
