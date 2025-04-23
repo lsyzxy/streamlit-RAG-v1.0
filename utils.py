@@ -15,7 +15,8 @@ class TongyiEmbeddings(Embeddings):
     def __init__(self):
         api_key = os.getenv("DASHSCOPE_API_KEY")
         if api_key is None:
-            raise ValueError("DASHSCOPE_API_KEY environment variable is not set.")
+            raise ValueError("The DASHSCOPE_API_KEY environment variable is not set in the current environment. "
+                             "Please set it in the Streamlit Cloud settings.")
         os.environ["DASHSCOPE_API_KEY"] = api_key
 
     def embed_documents(self, texts):
