@@ -5,6 +5,7 @@ attrs==23.2.0
 beautifulsoup4==4.12.2
 cachetools==5.3.3
 certifi==2024.2.2
+pysqlite3-binary
 chromadb==0.4.16
 contourpy==1.2.0
 cycler==0.12.1

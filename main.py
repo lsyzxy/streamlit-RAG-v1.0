@@ -1,3 +1,22 @@
+import sys
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
+# 原有的导入语句
+import streamlit as st
+from langchain.memory import ConversationBufferMemory
+from utils import qa_agent
+
+import sys
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
 import streamlit as st
 
 from langchain.memory import ConversationBufferMemory
