@@ -159,7 +159,7 @@ requests==2.31.0
 requirementslib==3.0.0
 rich==13.7.1
 rpds-py==0.18.0
-scikit-learn-intelex==20230426.121932
+scikit-learn-intelex==2025.5.0
 scipy==1.11.4
 seaborn==0.13.0
 smmap==5.0.1
