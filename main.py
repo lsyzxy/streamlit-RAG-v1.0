@@ -27,6 +27,7 @@ if uploaded_file and question and not api_key:
 
 if ask_button and uploaded_file and question and api_key:
     with st.spinner("AI正在思考中，请稍等..."):
+        # 调用 qa_agent 时传入两个 api_key
         response = qa_agent(api_key, api_key, st.session_state["memory"],
                             uploaded_file, question)
     st.write("### 答案")

@@ -11,15 +11,17 @@ from langchain.chains import ConversationalRetrievalChain
 import os
 
 class TongyiEmbeddings(Embeddings):
-
     def __init__(self, api_key):
-        os.environ["DASHSCOPE_API_KEY"] = api_key
+        # 直接使用传入的 api_key，而不是从环境变量获取
+        self.api_key = api_key
 
     def embed_documents(self, texts):
-        return [TextEmbedding.call(input=text, model="text-embedding-v1").output["embeddings"][0]["embedding"] for text in texts]
+        # 在调用 TextEmbedding.call 时传入 api_key
+        return [TextEmbedding.call(input=text, model="text-embedding-v1", api_key=self.api_key).output["embeddings"][0]["embedding"] for text in texts]
 
     def embed_query(self, text):
-        return TextEmbedding.call(input=text, model="text-embedding-v1").output["embeddings"][0]["embedding"]
+        # 在调用 TextEmbedding.call 时传入 api_key
+        return TextEmbedding.call(input=text, model="text-embedding-v1", api_key=self.api_key).output["embeddings"][0]["embedding"]
 
 def qa_agent(qwen_api_key, dashscope_api_key, memory, uploaded_file, question):
     model = ChatOpenAI(
@@ -39,6 +41,7 @@ def qa_agent(qwen_api_key, dashscope_api_key, memory, uploaded_file, question):
         separators=["\n", "。", "！", "？", "，", "、", ""]
     )
     texts = text_splitter.split_documents(docs)
+    # 实例化 TongyiEmbeddings 时传入 dashscope_api_key
     embeddings_model = TongyiEmbeddings(dashscope_api_key)
     db = FAISS.from_documents(texts, embeddings_model)
     retriever = db.as_retriever()
